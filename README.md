@@ -1,8 +1,58 @@
-# React + Vite
+# <div align="center">👟 React Sneakers</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 📌 About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**React Sneakers** is a simple multi-page online store for sneakers. Built using **React**, with **Sass** and other modern technologies.
+
+<br/>
+
+## 🚀 Used Technologies
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <a href="https://reactjs.org/" target="_blank">
+        <img src="https://profilinator.rishav.dev/skills-assets/react-original-wordmark.svg" alt="React" height="50" />
+      </a>
+      <br />React
+    </td>
+    <td align="center" width="33%">
+      <a href="https://www.javascript.com/" target="_blank">
+        <img src="https://profilinator.rishav.dev/skills-assets/javascript-original.svg" alt="JavaScript" height="50" />
+      </a>
+      <br />JavaScript
+    </td>
+    <td align="center" width="33%">
+      <a href="https://sass-lang.com/" target="_blank">
+        <img src="https://profilinator.rishav.dev/skills-assets/sass-original.svg" alt="Sass" height="50" />
+      </a>
+      <br />Sass
+    </td>
+  </tr>
+</table>
+
+🔹 **Macro-CSS** is also used to enhance styling.
+
+<br/>
+
+## 📦 Installation & Run
+
+```sh
+# Clone the repository
+git clone https://github.com/your-username/react-sneakers.git
+
+# Navigate to the project directory
+cd react-sneakers
+
+# Install dependencies
+npm install
+
+# Start the project
+npm start
+```
+
+---
+
+_✨ Created with love for React and stylish sneakers!_
