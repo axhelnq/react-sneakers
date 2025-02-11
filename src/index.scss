@@ -45,6 +45,16 @@ header {
   border: 1px solid #f2f2f2;
   border-radius: 10px;
   padding: 0 15px;
+  position: relative;
+
+  .clear {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 14px;
+    right: 0px;
+  }
+
 
   input {
     border: 0;
@@ -82,7 +92,6 @@ header {
   padding: 30px;
   display: flex;
   flex-direction: column;
-
 
   .items {
     flex: 1;
@@ -187,4 +196,33 @@ header {
       opacity: 1;
     }
   }
+}
+
+.cartEmpty {
+  text-align: center;
+
+  p {
+    width: 280px;
+    line-height: 24px;
+  }
+
+  .greenButton {
+    width: 245px;
+    margin-top: 20px;
+
+    &:hover {
+      img {
+        transform: rotate(180deg) translateX(3px);
+      }
+    }
+
+    img {
+      position: relative;
+      top: 1px;
+      transform: rotate(180deg);
+      margin-right: 15px;
+      transition: transform .15s ease-in-out;
+    }
+  }
+
 }

@@ -34,7 +34,10 @@
 </table>
 
 🔹 **Macro-CSS** is also used to enhance styling.
-
+<br/>
+🔹 **mockAPI**
+<br/>
+🔹 **Axios**
 <br/>
 
 ## 📦 Installation & Run

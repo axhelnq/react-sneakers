@@ -10,12 +10,18 @@ export default function Header(props) {
       </div>
       <div>
         <ul className="d-flex">
-          <li className="mr-30 cu-p" onClick={props.onClickCart}>
-            <img className="mr-10" width={18} height={18} src={'../public/img/cart.svg'} alt="cart"/>
-            <span>1205 грн.</span>
+          <li className="mr-30 cu-p d-flex align-center" onClick={props.onClickCart}>
+            <img className="mr-10" width={18} height={18} src={'../public/img/cart.svg'} alt="Корзина"/>
+            <span style={{color: '#5C5C5C'}}>1205 грн.</span>
           </li>
-          <li>
-            <img className="cu-p" width={18} height={18} src={'../public/img/user.svg'} alt="user"/></li>
+          <li className="mr-30 cu-p d-flex align-center">
+            <img className="mr-10" width={18} height={18} src={'../public/img/fav.svg'} alt="Закладки"/>
+            <span style={{color: '#5C5C5C'}}>Закладки</span>
+          </li>
+          <li className="cu-p d-flex align-center">
+            <img className="mr-10" width={18} height={18} src={'../public/img/user.svg'} alt="Пользователь"/>
+            <span style={{color: '#5C5C5C'}}>Профіль</span>
+          </li>
         </ul>
       </div>
     </header>
