@@ -14,7 +14,9 @@
     "macro-css": "^1.0.5",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
+    "react-content-loader": "^7.0.2",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.5",
     "sass": "^1.84.0"
   },
   "devDependencies": {

@@ -1,8 +1,12 @@
-import Card from "./components/Card/Card.jsx";
 import Header from "./components/Header.jsx";
 import Drawer from "./components/Drawer.jsx";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { Route, Routes } from "react-router-dom";
+import AppContext from "./context.js";
+
+import Home from "./pages/Home.jsx";
+import Favorites from "./pages/Favorites.jsx";
 
 export default function App() {
   const [cartOpened, setCartOpened] = useState(false)
@@ -10,85 +14,103 @@ export default function App() {
   const [cartItems, setCartItems] = useState([])
   const [searchValue, setSearchValue] = useState('')
   const [favorites, setFavorites] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    axios.get('https://67a7311c203008941f66e0f7.mockapi.io/items')
-    .then(res => setItems(res.data))
-    .catch((error) => console.error('❌ Помилка при завантаженні даних про товари:', error))
-    axios.get('https://67a7311c203008941f66e0f7.mockapi.io/cart')
-      .then(res => setCartItems(res.data))
-      .catch((error) => console.error('❌ Помилка при завантаженні даних про товари в корзині:', error))
+    async function fetchData(){
+      setIsLoading(true)
+
+      const cartResponse = await axios.get('https://67a7311c203008941f66e0f7.mockapi.io/cart')
+      const favoritesResponse = await axios.get('https://67a7311c203008941f66e0f7.mockapi.io/favorites')
+      const itemsResponse = await axios.get('https://67a7311c203008941f66e0f7.mockapi.io/items')
+
+      setIsLoading(false)
+
+      setCartItems(cartResponse.data)
+      setFavorites(favoritesResponse.data)
+      setItems(itemsResponse.data)
+    }
+    fetchData()
   }, [])
 
-  if (cartOpened) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = 'auto'
+  const onAddToCart = async (obj) => {
+    try {
+      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+        await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/cart/${obj.id}`)
+        setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)))
+      } else {
+        const { data } = await axios.post('https://67a7311c203008941f66e0f7.mockapi.io/cart', obj)
+        setCartItems(prev => [...prev, data])
+      }
+    } catch (error) {
+      console.error('❌ Помилка при додаванні/видаленні товара з кошика:', error)
+    }
   }
 
-  const onAddToCart = (obj) => {
-    axios.post('https://67a7311c203008941f66e0f7.mockapi.io/cart', obj)
-      .catch((error) => console.error('❌ Помилка при додавання товара в кошик:', error))
-    setCartItems(prev => [...prev, obj])
+  const onAddToFavorites = async (obj) => {
+    try {
+      if (favorites.find(favObj => Number(favObj.id) === Number(obj.id))) {
+        await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/favorites/${obj.id}`)
+        setFavorites((prev) => prev.filter((item) => item.id !== obj.id))
+      } else {
+        const { data } = await axios.post('https://67a7311c203008941f66e0f7.mockapi.io/favorites', obj)
+        setFavorites(prev => [...prev, data])
+      }
+    } catch (error) {
+      console.error('❌ Помилка при додаванні/видаленні товара з улюблених:', error)
+    }
   }
 
-  const onAddToFavorites = (obj) => {
-    axios.post('https://67a7311c203008941f66e0f7.mockapi.io/favorites', obj)
-      .catch((error) => console.error('❌ Помилка при додавання товара в улюблені:', error))
-    setFavorites(prev => [...prev, obj])
+  const isItemAddedToCart = (id) => {
+    return cartItems.some(obj => Number(obj.id) === Number(id))
   }
 
   return (
-    <div className="wrapper clear">
-      {cartOpened &&
-        <Drawer
-          cartItems={cartItems}
-          onClickClose={() => {setCartOpened(false)}}
-        />
-      }
-      <Header onClickCart={() => {setCartOpened(true)}}/>
-      <div className="content p-40">
-      <div className="d-flex align-center justify-between mb-40">
-        <h1>{searchValue.trim().length ? `Пошук за запитом: "${searchValue}"` : 'Всі кросівки'}</h1>
-        <div className="search-block d-flex">
-          <img src="../public/img/search.svg" alt="search"/>
-          {searchValue &&
-            <img
-              className="clear cu-p"
-              src={'../public/img/btn-remove.svg'}
-              alt="Clear"
-              onClick={() => setSearchValue("")}
-            />
-          }
-          <input
-            type="text"
-            placeholder="Пошук..."
-            value={searchValue}
-            onChange={(event) => setSearchValue(event.target.value)}
+    <AppContext.Provider
+      value={{
+        items,
+        cartItems,
+        favorites,
+        isItemAddedToCart,
+        setCartOpened,
+      }}
+    >
+      <div className="wrapper clear">
+        {cartOpened &&
+          <Drawer
+            cartItems={cartItems}
+            onClickClose={() => setCartOpened(false)}
+            setCartItems={setCartItems}
           />
-        </div>
+        }
+        <Header onClickCart={() => setCartOpened(true)}/>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                items={items}
+                cartItems={cartItems}
+                favorites={favorites}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                onAddToCart={onAddToCart}
+                onAddToFavorites={onAddToFavorites}
+                isLoading={isLoading}
+              />
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                onAddToCart={onAddToCart}
+                onAddToFavorites={onAddToFavorites}
+              />
+            }
+          />
+        </Routes>
       </div>
-        <div className="d-flex flex-wrap">
-          {items.length > 0 ? (
-            items
-              .filter(item =>
-                item.name.toLowerCase().includes(searchValue.toLowerCase()))
-              .map((item) => (
-                <Card
-                  key={item.id} // тут
-                  name={item.name}
-                  price={item.price}
-                  imageUrl={item.imageUrl}
-                  onPlusClick={(obj) => onAddToCart(obj)}
-                  onFavClick={(obj) => onAddToFavorites(obj)}
-                  id={item.id}
-                />
-              ))
-          ) : (
-            <p>Завантаження даних... Надіємося що mockAPI не підведе!😁</p>
-          )}
-        </div>
-      </div>
-    </div>
+    </AppContext.Provider>
   )
 }

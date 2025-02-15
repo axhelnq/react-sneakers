@@ -127,6 +127,19 @@ header {
   .greenButton {
     position: relative;
 
+    &:disabled {
+      background-color: #bebebe;
+      cursor: not-allowed;
+
+      &::after {
+        content: '...';
+      }
+
+      img {
+        display: none;
+      }
+    }
+
     &:hover {
       img {
         transform: translateX(5px);
