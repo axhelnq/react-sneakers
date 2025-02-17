@@ -3,16 +3,17 @@ import {useContext, useState} from "react";
 import ContentLoader from "react-content-loader";
 import AppContext from "../../context.js";
 
-export default function Card({name, price, imageUrl, id, onPlusClick, onFavClick, favorited = false, loading = false}) {
+export default function Card({name, price, imageUrl, id, parentId, onPlusClick, onFavClick, favorited = false, loading = false}) {
   const [isFav, setIsFav] = useState(favorited)
   const { isItemAddedToCart } = useContext(AppContext)
+  const itemObj = {name, price, imageUrl, id, parentId: id}
 
   function onClickAdd() {
-    onPlusClick({name, price, imageUrl, id})
+    onPlusClick(itemObj)
   }
 
   function onClickFav() {
-    onFavClick({name, price, imageUrl, id})
+    onFavClick(itemObj)
     setIsFav(!isFav)
   }
   
@@ -34,9 +35,9 @@ export default function Card({name, price, imageUrl, id, onPlusClick, onFavClick
         </ContentLoader>
         :
         <>
-          <div className={styles.favorite} onClick={onClickFav}>
+          {onFavClick && <div className={styles.favorite} onClick={onClickFav}>
             <img src={isFav ? "../public/img/btn-liked.svg" : "../public/img/btn-unliked.svg"} alt="fav"/>
-          </div>
+          </div>}
           <img width="100%" height={135} src={imageUrl} alt="Sneakers"/>
           <h5>{name}</h5>
           <div className="d-flex justify-between align-center">
@@ -44,12 +45,12 @@ export default function Card({name, price, imageUrl, id, onPlusClick, onFavClick
               <span>Ціна:</span>
               <b>{price} грн.</b>
             </div>
-              <img
-                src={isItemAddedToCart(id) ? '../public/img/btn-checked.svg' : '../public/img/btn-plus.svg'}
-                alt="+"
-                className={styles.plus}
-                onClick={onClickAdd}
-              />
+            {onPlusClick && <img
+              src={isItemAddedToCart(id) ? '../public/img/btn-checked.svg' : '../public/img/btn-plus.svg'}
+              alt="+"
+              className={styles.plus}
+              onClick={onClickAdd}
+            />}
           </div>
         </>
       }

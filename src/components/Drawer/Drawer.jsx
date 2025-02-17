@@ -1,23 +1,20 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import axios from "axios";
-import Info from "./Info.jsx";
+import Info from "../Info.jsx";
+import { useCart } from "../../hooks/useCart.js";
+import styles from "./Drawer.module.scss";
 
-export default function Drawer({ cartItems, setCartItems, onClickClose }) {
-  const [items, setItems] = useState(cartItems) // локальний стан якось не обовязковий і його потім якось треба прибрати
+export default function Drawer({ onClickClose, opened }) {
+  const { cartItems, setCartItems, totalPrice } = useCart()
   const [isOrderCompleted, setIsOrderCompleted] = useState(false)
   const [orderId, setOrderId] = useState(null)
   const [isLoading, setIsLoading] = useState()
-
-  useEffect(() => {
-    setItems(cartItems)
-  }, [cartItems])
 
   const handleRemove = async (id) => {
     try {
       await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/cart/${id}`);
 
-      setCartItems((prev) => prev.filter((item) => item.id !== id))
-      setItems((prev) => prev.filter((item) => item.id !== id))
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)))
     } catch (error) {
       console.error("❌ Помилка при видаленні предмета з кошика:", error);
     }
@@ -42,8 +39,8 @@ export default function Drawer({ cartItems, setCartItems, onClickClose }) {
   }
 
   return (
-    <div className="overlay">
-      <div className="drawer">
+    <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
+      <div className={styles.drawer}>
         <h2 className="mb-30 d-flex justify-between">
           Кошик
           <img
@@ -53,11 +50,11 @@ export default function Drawer({ cartItems, setCartItems, onClickClose }) {
             alt="Close"
           />
         </h2>
-        {items.length > 0
+        {cartItems.length > 0
           ? (
             <>
-              <div className="items">
-                {items.map((obj) => (
+              <div className="items flex">
+                {cartItems.map((obj) => (
                   <div className="cartItem d-flex align-center mb-20" key={obj.id}>
                     <div style={{backgroundImage: `url(${obj.imageUrl})`}} className="cartItemImg"></div>
                     <div className="mr-20 flex">
@@ -78,12 +75,12 @@ export default function Drawer({ cartItems, setCartItems, onClickClose }) {
                   <li>
                     <span>Разом:</span>
                     <div></div>
-                    <b>15 000 грн.</b>
+                    <b>{`${totalPrice} грн.`}</b>
                   </li>
                   <li>
-                    <span>Податок 5%:</span>
+                    <span>З них на ПДВ 20%:</span>
                     <div></div>
-                    <b>750 грн.</b>
+                    <b>{`${totalPrice * 0.2} грн.`}</b>
                   </li>
                 </ul>
                 <button
