@@ -1,8 +1,8 @@
-import { useState } from "react";
-import axios from "axios";
-import Info from "../Info.jsx";
-import { useCart } from "../../hooks/useCart.js";
-import styles from "./Drawer.module.scss";
+import axios from "axios"
+import Info from "../Info.jsx"
+import styles from "./Drawer.module.scss"
+import { useEffect, useState } from "react"
+import { useCart } from "../../hooks/useCart.js"
 
 export default function Drawer({ onClickClose, opened }) {
   const { cartItems, setCartItems, totalPrice } = useCart()
@@ -10,15 +10,40 @@ export default function Drawer({ onClickClose, opened }) {
   const [orderId, setOrderId] = useState(null)
   const [isLoading, setIsLoading] = useState()
 
+  const handleEscapeKey = (event) => {
+    if (event.key === 'Escape') {
+      onClickClose()
+    }
+  }
+
+  useEffect(() => {
+    if (opened) {
+      document.body.style.overflow = 'hidden'
+      document.addEventListener('keydown', handleEscapeKey)
+      window.scrollTo({
+        top: 0,
+        behavior: 'auto'
+      });
+    } else {
+      document.body.style.overflow = 'visible'
+    }
+
+    return () => {
+      document.body.style.overflow = 'visible'
+      document.removeEventListener('keydown', handleEscapeKey)
+    }
+  }, [opened, onClickClose])
+
+
   const handleRemove = async (id) => {
     try {
-      await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/cart/${id}`);
+      await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/cart/${id}`)
 
       setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)))
     } catch (error) {
-      console.error("❌ Помилка при видаленні предмета з кошика:", error);
+      console.error("❌ Помилка при видаленні предмета з кошика:", error)
     }
-  };
+  }
 
   const onClickOrder = async () => {
     try {
@@ -27,7 +52,7 @@ export default function Drawer({ onClickClose, opened }) {
         items: cartItems,
       })
       for (const item of cartItems) { // костиль) mockAPI не може робити реплейс
-        await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/cart/${item.id}`);
+        await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/cart/${item.id}`)
       }
       setOrderId(data.id)
       setIsOrderCompleted(true)

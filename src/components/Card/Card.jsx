@@ -1,9 +1,10 @@
-import styles from './Card.module.scss'
-import {useContext, useState} from "react";
-import ContentLoader from "react-content-loader";
-import AppContext from "../../context.js";
+import styles from "./Card.module.scss"
+import AppContext from "../../context.js"
+import { useContext, useState } from "react"
+import ContentLoader from "react-content-loader"
 
-export default function Card({name, price, imageUrl, id, parentId, onPlusClick, onFavClick, favorited = false, loading = false}) {
+
+export default function Card({name, price, imageUrl, id, onPlusClick, onFavClick, favorited = false, loading = false}) {
   const [isFav, setIsFav] = useState(favorited)
   const { isItemAddedToCart } = useContext(AppContext)
   const itemObj = {name, price, imageUrl, id, parentId: id}

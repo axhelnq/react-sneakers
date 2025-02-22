@@ -1,5 +1,5 @@
-import {useContext} from "react";
-import AppContext from "../context.js";
+import {useContext} from "react"
+import AppContext from "../context.js"
 
 export default function Info({title, description, image}) {
   const {setCartOpened} = useContext(AppContext)

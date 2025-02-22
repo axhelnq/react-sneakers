@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useCart } from "../hooks/useCart.js";
+import { Link } from "react-router-dom"
+import { useCart } from "../hooks/useCart.js"
 
 export default function Header(props) {
   const { totalPrice } = useCart()
@@ -17,18 +17,18 @@ export default function Header(props) {
       </Link>
       <div>
         <ul className="d-flex">
-          <li className="mr-30 cu-p d-flex align-center" onClick={props.onClickCart}>
+          <li className="mr-30 cu-p d-flex align-center fw-bold" onClick={props.onClickCart}>
             <img className="mr-10" width={18} height={18} src={'../public/img/cart.svg'} alt="Корзина"/>
             <span style={{color: '#5C5C5C'}}>{`${totalPrice} грн.`}</span>
           </li>
           <li className="mr-30 cu-p d-flex align-center">
-            <Link to={'/favorites'}>
+            <Link to={'/favorites'} className="d-flex align-center">
               <img className="mr-10" width={18} height={18} src={'../public/img/fav.svg'} alt="Закладки"/>
               <span style={{color: '#5C5C5C'}}>Закладки</span>
             </Link>
           </li>
           <li className="cu-p d-flex align-center">
-            <Link to={'/orders'}>
+            <Link to={'/orders'} className="d-flex align-center">
               <img className="mr-10" width={18} height={18} src={'../public/img/user.svg'} alt="Пользователь"/>
               <span style={{color: '#5C5C5C'}}>Профіль</span>
             </Link>

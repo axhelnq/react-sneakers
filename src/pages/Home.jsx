@@ -1,6 +1,10 @@
-import Card from "../components/Card/Card.jsx";
+import { useContext } from "react"
+import AppContext from "../context.js"
+import Card from "../components/Card/Card.jsx"
 
-export default function Home({items, searchValue, setSearchValue, onAddToCart, onAddToFavorites, favorites, isLoading}) {
+export default function Home({searchValue, setSearchValue, isLoading}) {
+  const { items, favorites, onAddToCart, onAddToFavorites } = useContext(AppContext)
+
   const renderItems = () => {
     return (
       isLoading
@@ -13,7 +17,7 @@ export default function Home({items, searchValue, setSearchValue, onAddToCart, o
           onFavClick={(obj) => onAddToFavorites(obj)}
           favorited={favorites.some(obj => Number(obj.id) === Number(item.id))}
           loading={isLoading}
-          {...item} // name url id price
+          {...item}
         />
       )
     )
@@ -24,11 +28,11 @@ export default function Home({items, searchValue, setSearchValue, onAddToCart, o
       <div className="d-flex align-center justify-between mb-40">
         <h1>{searchValue.trim().length ? `Пошук за запитом: "${searchValue}"` : 'Всі кросівки'}</h1>
         <div className="search-block d-flex">
-          <img src="../public/img/search.svg" alt="search"/>
+          <img src="/img/search.svg" alt="search"/>
           {searchValue &&
             <img
               className="clear cu-p"
-              src={'../public/img/btn-remove.svg'}
+              src={'/img/btn-remove.svg'}
               alt="Clear"
               onClick={() => setSearchValue("")}
             />

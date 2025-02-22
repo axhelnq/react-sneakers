@@ -28,17 +28,17 @@
   height: 100%;
   background: #fff;
   right: 0;
-  box-shadow: -10 4px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
   padding: 30px;
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
   transition: transform .3s ease-in-out;
-  // justify-content: space-between;
+  overflow: auto; // костиль
 
   .items {
     flex: 1;
-    overflow: auto;
+    overflow: auto; // нема скролу і нервів щоб його добавити
     margin-bottom: 40px;
   }
 

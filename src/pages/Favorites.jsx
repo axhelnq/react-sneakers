@@ -1,14 +1,25 @@
-import Card from "../components/Card/Card.jsx";
-import {useContext} from "react";
-import AppContext from "../context.js";
+import { useContext } from "react"
+import AppContext from "../context.js"
+import { useNavigate } from "react-router-dom"
+import Card from "../components/Card/Card.jsx"
 
-export default function Favorites({onAddToFavorites, onAddToCart}) {
-const {favorites} = useContext(AppContext)
+export default function Favorites() {
+  const { favorites, onAddToFavorites, onAddToCart } = useContext(AppContext)
+  const navigate = useNavigate()
+
 
   return (
     <div className="content p-40">
       <div className="d-flex align-center justify-between mb-40">
-        <h1>Мої закладки</h1>
+        <h1 className="d-flex align-center justify-between">
+          <img
+            src={'img/back-button.svg'}
+            alt="<"
+            className="pr-20 cu-p"
+            onClick={() => navigate(-1)}
+          />
+          Мої закладки
+        </h1>
       </div>
       <div className="d-flex flex-wrap">
         {favorites.length > 0 ? (
@@ -19,11 +30,24 @@ const {favorites} = useContext(AppContext)
                 onFavClick={(obj) => onAddToFavorites(obj)}
                 onPlusClick={(obj) => onAddToCart(obj)}
                 favorited
-                {...item} // name url id price
+                {...item}
               />
             ))
         ) : (
-          <p>Пусто</p>
+          <div className="cartEmpty d-flex align-center justify-center flex-column flex">
+            <img
+              src={'/img/favorites-empty.png'}
+              width={70}
+              alt="cart state image"
+              className="mb-20"
+            />
+            <h2 className="mb-5">Закладок нема :(</h2>
+            <p className="opacity-6 mb-50">Ви нічого не добавляли в закладки</p>
+            <button className="greenButton" onClick={() => navigate(-1)}>
+              <img src={'../public/img/arrow.svg'} alt="Arrow"/>
+              Повернутися назад
+            </button>
+          </div>
         )}
       </div>
     </div>
