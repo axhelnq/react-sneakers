@@ -71,7 +71,7 @@ export default function Drawer({ onClickClose, opened }) {
           <img
             onClick={onClickClose}
             className="removeBtn cu-p"
-            src={'../public/img/btn-remove.svg'}
+            src="/img/btn-remove.svg"
             alt="Close"
           />
         </h2>
@@ -88,7 +88,7 @@ export default function Drawer({ onClickClose, opened }) {
                     </div>
                     <img
                       className="removeBtn"
-                      src={'../public/img/btn-remove.svg'}
+                      src="/img/btn-remove.svg"
                       alt="remove"
                       onClick={() => handleRemove(obj.id)}
                     />
@@ -113,7 +113,7 @@ export default function Drawer({ onClickClose, opened }) {
                   onClick={() => onClickOrder()}
                   disabled={isLoading}
                 >
-                  Оформити замовлення <img src={'../public/img/arrow.svg'} alt="arrow"/>
+                  Оформити замовлення <img src="/img/arrow.svg" alt="arrow"/>
                 </button>
               </div>
             </>
@@ -121,7 +121,7 @@ export default function Drawer({ onClickClose, opened }) {
             <Info
               title={isOrderCompleted ? 'Замовлення оформлене!' : 'Кошик пустий'}
               description={isOrderCompleted ? `Ваше замовлення #${orderId} незабаром буде передано кур'єрській доставці` :'Добавте хоча б одну пару кросівок, щоб зробити замовлення.'}
-              image={isOrderCompleted ? '../public/img/completed-order.jpg' :'../public/img/empty-cart.jpg'}
+              image={isOrderCompleted ? '/img/completed-order.jpg' :'/img/empty-cart.jpg'}
             />
           )
         }

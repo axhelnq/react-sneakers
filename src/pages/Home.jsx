@@ -32,7 +32,7 @@ export default function Home({searchValue, setSearchValue, isLoading}) {
           {searchValue &&
             <img
               className="clear cu-p"
-              src={'/img/btn-remove.svg'}
+              src="/img/btn-remove.svg"
               alt="Clear"
               onClick={() => setSearchValue("")}
             />

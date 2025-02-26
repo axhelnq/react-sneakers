@@ -41,7 +41,7 @@ export default function Orders() {
       <div className="d-flex align-center justify-between mb-40">
         <h1 className="d-flex align-center justify-between">
           <img
-            src={'img/back-button.svg'}
+            src="/img/back-button.svg"
             alt="<"
             className="pr-20 cu-p"
             onClick={() => navigate(-1)}
@@ -55,7 +55,7 @@ export default function Orders() {
           : (
             <div className="cartEmpty d-flex align-center justify-center flex-column flex">
               <img
-                src={'/img/orders-empty.png'}
+                src="/img/orders-empty.png"
                 width={70}
                 alt="cart state image"
                 className="mb-20"
@@ -63,7 +63,7 @@ export default function Orders() {
               <h2 className="mb-5">У вас нема замовлень</h2>
               <p className="opacity-6 mb-40">Ви жебрка?<br/>Оформіть хоча б одне замовлення.</p>
               <button className="greenButton" onClick={() => navigate(-1)}>
-                <img src={'../public/img/arrow.svg'} alt="Arrow"/>
+                <img src="/img/arrow.svg" alt="Arrow"/>
                 Повернутися назад
               </button>
             </div>

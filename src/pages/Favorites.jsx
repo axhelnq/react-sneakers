@@ -13,7 +13,7 @@ export default function Favorites() {
       <div className="d-flex align-center justify-between mb-40">
         <h1 className="d-flex align-center justify-between">
           <img
-            src={'img/back-button.svg'}
+            src="/img/back-button.svg"
             alt="<"
             className="pr-20 cu-p"
             onClick={() => navigate(-1)}
@@ -36,7 +36,7 @@ export default function Favorites() {
         ) : (
           <div className="cartEmpty d-flex align-center justify-center flex-column flex">
             <img
-              src={'/img/favorites-empty.png'}
+              src="/img/favorites-empty.png"
               width={70}
               alt="cart state image"
               className="mb-20"
@@ -44,7 +44,7 @@ export default function Favorites() {
             <h2 className="mb-5">Закладок нема :(</h2>
             <p className="opacity-6 mb-50">Ви нічого не добавляли в закладки</p>
             <button className="greenButton" onClick={() => navigate(-1)}>
-              <img src={'../public/img/arrow.svg'} alt="Arrow"/>
+              <img src="/img/arrow.svg" alt="Arrow"/>
               Повернутися назад
             </button>
           </div>
