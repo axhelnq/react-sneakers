@@ -8,16 +8,17 @@
 
 <br/>
 
-## 🚀 Used Technologies  
+## 🚀 Used Technologies
 
-- ⚛️ **React.js** – Core library for building the user interface.  
-- 🎨 **SASS** – Preprocessor for writing more structured and maintainable styles.  
-- 🏗️ **React Skeleton** – Displays loading placeholders before content appears.  
-- 🔀 **React Router** – Manages navigation in a single-page application.  
-- 🎛️ **Macro-CSS** – Provides a set of utility classes similar to Tailwind.  
-- 🛠️ **mockAPI** – Used for testing API requests.  
-- 🌐 **Axios** – Handles HTTP requests to the backend.  
-- 📦 **npm** – Package manager for installing dependencies.  
+- ⚛️ **React.js** – Core library for building the user interface.
+- 🎨 **SASS** – Preprocessor for writing more structured and maintainable styles.
+- 🏗️ **React Skeleton** – Displays loading placeholders before content appears.
+- 🔀 **React Router** – Manages navigation in a single-page application.
+- 🎛️ **Macro-CSS** – Provides a set of utility classes similar to Tailwind.
+- 🛠️ **mockAPI** – Used for testing API requests.
+- 🌐 **Axios** – Handles HTTP requests to the backend.
+- 📦 **npm** – Package manager for installing dependencies.
+- ❤️ **Prettier** – Ensures consistent and clean code formatting across the project.
 
 <table align="center">
     <td align="center">
@@ -49,10 +50,13 @@
       <br>npm
     </td>
     <td align="center">
+      <img src="https://prettier.io/icon.png" width="80"/>
+      <br>Prettier
+    </td>
+    <td align="center">
       🔹macro-css
     </td>
 </table>
-
 
 ## 📦 Installation & Run
 
