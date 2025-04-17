@@ -14,8 +14,8 @@
 - 🎨 **SASS** – Preprocessor for writing more structured and maintainable styles.
 - 🏗️ **React Skeleton** – Displays loading placeholders before content appears.
 - 🔀 **React Router** – Manages navigation in a single-page application.
-- 🎛️ **Macro-CSS** – Provides a set of utility classes similar to Tailwind.
-- 🛠️ **mockAPI** – Used for testing API requests.
+- 🎛️ **macro-css** – Provides a set of utility classes similar to Tailwind.
+- 🛠️ **json-server** – Used for testing API requests.
 - 🌐 **Axios** – Handles HTTP requests to the backend.
 - 📦 **npm** – Package manager for installing dependencies.
 - ❤️ **Prettier** – Ensures consistent and clean code formatting across the project.
@@ -38,10 +38,6 @@
       <br>React Skeleton
     </td>
     <td align="center">
-      <img src="https://cdn-b.saashub.com/images/app/service_logos/109/16be0e389960/large.png?1574941443" width="80"/>
-      <br>mockAPI
-    </td>
-    <td align="center">
       <img src="https://user-images.githubusercontent.com/8939680/57233882-20344080-6fe5-11e9-9086-d20a955bed59.png" width="80"/>
       <br>Axios
     </td>
@@ -52,6 +48,9 @@
     <td align="center">
       <img src="https://prettier.io/icon.png" width="80"/>
       <br>Prettier
+    </td>
+    <td align="center">
+    <a href="https://github.com/typicode/json-server">🔹json-server</a>
     </td>
     <td align="center">
       🔹macro-css
@@ -68,10 +67,10 @@ git clone https://github.com/axhelnq/react-sneakers.git
 cd react-sneakers
 
 # Install dependencies
-npm install
+npm i
 
 # Start the project
-npm start
+npm run dev
 ```
 
 ---

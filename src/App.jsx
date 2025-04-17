@@ -24,9 +24,9 @@ export default function App() {
 				setIsLoading(true)
 
 				const [cartResponse, favoritesResponse, itemsResponse] = await Promise.all([
-					axios.get('https://67a7311c203008941f66e0f7.mockapi.io/cart'),
-					axios.get('https://67a7311c203008941f66e0f7.mockapi.io/favorites'),
-					axios.get('https://67a7311c203008941f66e0f7.mockapi.io/items')
+					axios.get('http://localhost:3001/cart'),
+					axios.get('http://localhost:3001/favorites'),
+					axios.get('http://localhost:3001/items')
 				])
 
 				setIsLoading(false)
@@ -46,10 +46,10 @@ export default function App() {
 			const findItem = cartItems.find((item) => item.parentId === obj.id)
 			if (findItem) {
 				setCartItems((prev) => prev.filter((item) => Number(item.parentId) !== Number(obj.id)))
-				await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/cart/${findItem.id}`)
+				await axios.delete(`http://localhost:3001/cart/${findItem.id}`)
 			} else {
 				setCartItems((prev) => [...prev, obj])
-				const { data } = await axios.post('https://67a7311c203008941f66e0f7.mockapi.io/cart', obj)
+				const { data } = await axios.post('http://localhost:3001/cart', obj)
 				setCartItems((prev) =>
 					prev.map((item) => {
 						if (item.parentId === data.parentId) {
@@ -72,13 +72,10 @@ export default function App() {
 			const findItem = favorites.find((item) => item.parentId === obj.id)
 			if (findItem) {
 				setFavorites((prev) => prev.filter((item) => Number(item.parentId) !== Number(obj.id)))
-				await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/favorites/${findItem.id}`)
+				await axios.delete(`http://localhost:3001/favorites/${findItem.id}`)
 			} else {
 				setFavorites((prev) => [...prev, obj])
-				const { data } = await axios.post(
-					'https://67a7311c203008941f66e0f7.mockapi.io/favorites',
-					obj
-				)
+				const { data } = await axios.post('http://localhost:3001/favorites', obj)
 				setFavorites((prev) =>
 					prev.map((item) => {
 						if (item.parentId === data.parentId) {

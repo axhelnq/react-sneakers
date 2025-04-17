@@ -36,7 +36,7 @@ export default function Drawer({ onClickClose, opened }) {
 
 	const handleRemove = async (id) => {
 		try {
-			await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/cart/${id}`)
+			await axios.delete(`http://localhost:3001/cart/${id}`)
 
 			setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)))
 		} catch (error) {
@@ -47,12 +47,12 @@ export default function Drawer({ onClickClose, opened }) {
 	const onClickOrder = async () => {
 		try {
 			setIsLoading(true)
-			const { data } = await axios.post('https://67a7311c203008941f66e0f7.mockapi.io/orders', {
+			const { data } = await axios.post('http://localhost:3001/orders', {
 				items: cartItems
 			})
 			for (const item of cartItems) {
-				// костиль) mockAPI не може робити реплейс
-				await axios.delete(`https://67a7311c203008941f66e0f7.mockapi.io/cart/${item.id}`)
+				// костиль | mockAPI, json-server не може робити реплейс
+				await axios.delete(`http://localhost:3001/cart/${item.id}`)
 			}
 			setOrderId(data.id)
 			setIsOrderCompleted(true)
@@ -82,8 +82,7 @@ export default function Drawer({ onClickClose, opened }) {
 								<div className='cartItem d-flex align-center mb-20' key={obj.id}>
 									<div
 										style={{ backgroundImage: `url(${obj.imageUrl})` }}
-										className='cartItemImg'
-									></div>
+										className='cartItemImg'></div>
 									<div className='mr-20 flex'>
 										<p className='mb-5'>{obj.name}</p>
 										<b>{obj.price} грн.</b>

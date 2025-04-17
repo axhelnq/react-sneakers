@@ -12,7 +12,7 @@ export default function Orders() {
 	useEffect(() => {
 		;(async () => {
 			try {
-				const { data } = await axios.get('https://67a7311c203008941f66e0f7.mockapi.io/orders')
+				const { data } = await axios.get('http://localhost:3001/orders')
 				setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []))
 				setIsLoading(false)
 			} catch (error) {

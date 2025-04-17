@@ -10,7 +10,6 @@ export default function Card({
 	id,
 	onPlusClick,
 	onFavClick,
-	favorited = false,
 	loading = false
 }) {
 	const { isItemAddedToCart, isItemAddedToFav } = useContext(AppContext)
