@@ -60,19 +60,26 @@
 ## 📦 Installation & Run
 
 ```sh
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/axhelnq/react-sneakers.git
 
-# Navigate to the project directory
+# 2. Navigate into the project directory
 cd react-sneakers
 
-# Install dependencies
-npm i
+# 3. Install all dependencies
+npm install
 
-# Start the project
+# 4. Start the mock API (json-server)
+npm run server
+
+# 5. Launch the development server
 npm run dev
 ```
-
+- 💡 Make sure ports 5173 (Vite) and 3001 (json-server) are not in use.
+- ⚠️ If ***npm run server*** doesn’t work, you might need to install *json-server* globally:
+```sh
+npm i -g json-server
+```
 ---
 
 _✨ Created with love for React and stylish sneakers!_
